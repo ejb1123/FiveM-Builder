@@ -7,6 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b77ca70e-0561-437a-9f62-60765f622c6f" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LICENSE" afterPath="$PROJECT_DIR$/LICENSE" />
     </list>
@@ -264,6 +265,7 @@
     <property name="settings.editor.splitter.proportion" value="0.23212537" />
     <property name="ToolWindowTerminal.ShowToolbar" value="false" />
     <property name="SearchEverywhereHistoryKey" value="te&#9;ACTION&#9;ActivateTerminalToolWindow" />
+    <property name="GO_FMT" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -403,6 +405,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'master' of https://github.com/ejb1123/FiveM-Builder&#10;&#10;# Conflicts:&#10;#&#9;LICENSE" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/ejb1123/FiveM-Builder&#10;&#10;# Conflicts:&#10;#&#9;LICENSE" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
