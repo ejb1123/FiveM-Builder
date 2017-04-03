@@ -1,0 +1,8 @@
+server:
+  enabled: false
+  url: 127.0.0.1:30120
+  password: lovely
+  src: .
+  root: C:\Users\Username\Desktop\cfx-server
+  name: Project-Name
+  iceconpath: icecon.exe
