@@ -34,22 +34,17 @@ var configFile string
 // copyCmd represents the copy command
 var copyCmd = &cobra.Command{
 	Use:   "copy",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Copies files to a server",
+	Long:  `Copies file to a server`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO: Work your own magic here
 
 		fmt.Println("copy called")
-		h:=magic.ReadConfig(configFile)
-		fmt.Println(*h)
+		h := magic.ReadConfig(configFile)
+		//fmt.Println(*h)
 		files := magic.GetFiles(&h.Server.Src)
-		magic.DoCopy(files,&h.Server.Src,&h.Server.Root,&h.Server.ProjectName)
-		magic.RestartServer(&h.Server.Url,&h.Server.Password,&h.Server.ProjectName,&h.Server.IceCon)
+		magic.DoCopy(files, &h.Server.Src, &h.Server.Root, &h.Server.ProjectName)
+		magic.RestartServer(&h.Server.Url, &h.Server.Password, &h.Server.ProjectName, &h.Server.IceCon)
 	},
 }
 

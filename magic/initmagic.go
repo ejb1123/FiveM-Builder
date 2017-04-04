@@ -11,7 +11,6 @@ import (
 	"log"
 	"xi2.org/x/xz"
 	"io"
-	"gopkg.in/go-playground/validator.v8"
 )
 
 func CreateDirectory(folder *string) {
@@ -41,12 +40,18 @@ func CreateDirectory(folder *string) {
 	buf := new(bytes.Buffer)
 
 	buf.ReadFrom(res.Body)
-	dd,err:=ioutil.ReadAll(res.Body)
-	r, err := xz.NewReader(dd, 0)
+	r, err := xz.NewReader(buf, 0)
 	if err != nil {
 		log.Fatal(err)
 	}
-	j := r
-	io.Copy(filee, j)
+	io.Copy(filee, r)
 
+}
+
+type Directory struct {
+	path string;
+}
+
+func (d Directory) f(){
+	d.path="k"
 }

@@ -27,22 +27,16 @@ import (
 
 	"github.com/spf13/cobra"
 	"ejb1123.tk/FiveMBuilder/magic"
-	"strings"
 	"os"
-	"github.com/tinylib/msgp/_generated"
+	"strings"
 )
 
-var h string;
+//var h string;
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Long: `A brief description of your command`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("init called")
 		if cmd.Flags().NArg() > 1 || cmd.Flags().NArg() == 0 {
@@ -50,8 +44,8 @@ to quickly create a Cobra application.`,
 			os.Exit(1)
 		}
 		stringd := cmd.Flags().Arg(0)
-		if  _,err:=os.Stat(stringd);os.IsExist(err){
-			fmt.Println(stringd,"exists")
+		if _, err := os.Stat(stringd); os.IsExist(err) {
+			fmt.Println(stringd, "exists")
 			os.Exit(0)
 
 		}
@@ -70,9 +64,9 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	initCmd.Flags().StringVarP(&h, "toggle", "t", "d", "Help message for toggle")
+	//initCmd.Flags().StringVarP(&h, "toggle", "t", "d", "Help message for toggle")
 	usagestring := initCmd.UsageString()
-	strings := strings.SplitAfter(usagestring, "[flags]")
+	strings := strings.SplitAfter(usagestring, "FiveMBuilder init")
 	newstring := strings[0] + " project-name" + string(strings[1])
 	initCmd.SetUsageTemplate(newstring)
 }

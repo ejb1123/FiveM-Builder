@@ -41,7 +41,7 @@ var releaseCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(releaseCmd)
+	//RootCmd.AddCommand(releaseCmd)
 
 	// Here you will define your flags and configuration settings.
 
