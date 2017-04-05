@@ -35,8 +35,8 @@ import (
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
-	Short: "A brief description of your command",
-	Long: `A brief description of your command`,
+	Short: "Creates a dev enviroment",
+	Long: `Creates a dev enviroment to start wokring on FiveM mods.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("init called")
 		if cmd.Flags().NArg() > 1 || cmd.Flags().NArg() == 0 {

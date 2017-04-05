@@ -1,3 +1,24 @@
+/*MIT License
+
+Copyright (c) 2017 ejb1123
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.*/
 package magic
 
 import (
@@ -6,7 +27,7 @@ import (
 	"path"
 	"path/filepath"
 	"net/http"
-	"github.com/ulikunitz/xz"
+	//"github.com/ulikunitz/xz"
 	"io"
 	"fmt"
 	//"go/ast"
@@ -16,6 +37,8 @@ import (
 	"strings"
 	"log"
 	"text/template"
+	"github.com/nu7hatch/gouuid"
+	"xi2.org/x/xz"
 )
 
 //var filesToDownload= []string{"s","s"};
@@ -46,7 +69,7 @@ func CreateDirectory(folder *string) {
 		}
 		var r io.Reader
 		if v.CompressedSize != v.Size {
-			r, err = xz.NewReader(res.Body)
+			r, err = xz.NewReader(res.Body,0)
 			if err != nil {
 				panic(err)
 			}
@@ -161,11 +184,19 @@ func extractCSproj(folder *string) {
 			panic(err)
 		}
 
+		guidsalt, _ := filepath.Abs(*folder)
+
+		u5, err := uuid.NewV5(uuid.NamespaceURL, []byte(guidsalt))
+		if err != nil {
+			fmt.Println("error:", err)
+			return
+		}
+
 		Safeprojectname := Tempvars{
-			Safeprojectname: *folder, Guid1: "hjhj",
+			Safeprojectname: *folder, Guid1: u5.String(),
 		}
 		csprojTemplate := template.New("")
-		bytesres,err:=ioutil.ReadAll(lsrcreader)
+		bytesres, err := ioutil.ReadAll(lsrcreader)
 		if err != nil {
 			panic(err)
 		}
