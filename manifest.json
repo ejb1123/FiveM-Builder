@@ -1,13 +1,22 @@
 {
     "dependencies": {
+        "github.com/Shopify/go-lua": {
+            "branch": "master"
+        },
         "github.com/spf13/cobra": {
             "branch": "master"
         },
         "github.com/spf13/viper": {
             "branch": "master"
         },
+        "github.com/ulikunitz/xz": {
+            "branch": "master"
+        },
         "golang.org/x/sys": {
             "branch": "master"
+        },
+        "gopkg.in/yaml.v2": {
+            "branch": "v2"
         }
     }
 }
