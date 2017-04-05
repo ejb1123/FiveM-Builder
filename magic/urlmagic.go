@@ -6,7 +6,6 @@ import (
 	"os"
 	"log"
 	"io/ioutil"
-	"fmt"
 )
 
 type Cache_info struct {
@@ -29,7 +28,6 @@ func Parsexml() *Cache_info{
 		os.Exit(1)
 	}
 	bytesl, err := ioutil.ReadAll(res.Body)
-	fmt.Println(string(bytesl))
 	if err != nil {
 		panic(err)
 	}
