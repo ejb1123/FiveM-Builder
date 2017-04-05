@@ -14,22 +14,33 @@ import (
 )
 
 func GetFiles(src *string) *Tempfiles {
-
-	_, err := os.Stat(*src)
-	if err != nil {
-		fmt.Println("err")
-	}
-
 	files := Tempfiles{}
-	err = filepath.Walk(*src, func(path string, info os.FileInfo, err error) error {
-		res, _ := os.Stat(path)
+	/*if hasLuaResourceFile(src) {
+		luaFile := path.Join(*src, "__resource.lua")
+		Parselua(&luaFile)
+	} else {*/
+		_, err := os.Stat(*src)
+		if err != nil {
+			fmt.Println("err")
+		}
 
-		files.files = append(files.files, File{src: path, isFile: !res.IsDir()})
-		return nil
-	})
-	if err != nil {
-		panic(err)
-	}
+		err = filepath.Walk(*src, func(path string, info os.FileInfo, err error) error {
+			res, _ := os.Stat(path)
+			if filepath.IsAbs(path){
+				path,err = filepath.Rel(*src,path)
+				if(err!=nil){
+					log.Fatal(err)
+					return nil
+				}
+			}
+			files.files = append(files.files, File{src: path, isFile: !res.IsDir()})
+			return nil
+		})
+		if err != nil {
+			panic(err)
+		}
+	//}
+
 	return &files
 }
 
@@ -47,7 +58,7 @@ func DoCopy(tempfiles *Tempfiles, src *string, root *string, projectName *string
 				log.Fatal(err)
 				continue
 			}
-			io.Copy(dstFile,srcFile)
+			io.Copy(dstFile, srcFile)
 
 		} else {
 			if _, err := os.Stat(pathn); os.IsNotExist(err) {
@@ -93,21 +104,16 @@ func ReadConfig(config string) *T {
 	if g.Server.Enabled == false {
 		os.Exit(0)
 	}
-	/*if !filepath.IsAbs(g.Server.Src) {
-		pathh, err := filepath.Abs(g.Server.Src)
-		if err != nil {
-			panic(err)
-		}
-		g.Server.Src = pathh
-	}
-	if !filepath.IsAbs(g.Server.IceCon) {
-		pathh, err := filepath.Abs(g.Server.IceCon)
-		if err != nil {
-			panic(err)
-		}
-		g.Server.IceCon = pathh
-	}*/
 	return &g
+}
+
+func hasLuaResourceFile(src *string) bool {
+	luaFile := (path.Join(*src, "__resource.lua"))
+	if v, _ := os.Stat(luaFile);!v.IsDir() && v.Name() == "__resource.lua" {
+		return true
+	} else {
+		return false
+	}
 }
 
 func RestartServer(url *string, password *string, projectName *string, iceconPath *string) {

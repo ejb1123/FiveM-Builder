@@ -50,7 +50,6 @@ var initCmd = &cobra.Command{
 
 		}
 		magic.CreateDirectory(&stringd)
-
 	},
 }
 
