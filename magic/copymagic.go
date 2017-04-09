@@ -40,26 +40,26 @@ func GetFiles(src *string) *Tempfiles {
 		luaFile := path.Join(*src, "__resource.lua")
 		Parselua(&luaFile)
 	} else {*/
-		_, err := os.Stat(*src)
-		if err != nil {
-			fmt.Println("err")
-		}
+	_, err := os.Stat(*src)
+	if err != nil {
+		fmt.Println("err")
+	}
 
-		err = filepath.Walk(*src, func(path string, info os.FileInfo, err error) error {
-			res, _ := os.Stat(path)
-			if filepath.IsAbs(path){
-				path,err = filepath.Rel(*src,path)
-				if(err!=nil){
-					log.Fatal(err)
-					return nil
-				}
+	err = filepath.Walk(*src, func(path string, info os.FileInfo, err error) error {
+		res, _ := os.Stat(path)
+		if filepath.IsAbs(path) {
+			path, err = filepath.Rel(*src, path)
+			if (err != nil) {
+				log.Fatal(err)
+				return nil
 			}
-			files.files = append(files.files, File{src: path, isFile: !res.IsDir()})
-			return nil
-		})
-		if err != nil {
-			panic(err)
 		}
+		files.files = append(files.files, File{src: path, isFile: !res.IsDir()})
+		return nil
+	})
+	if err != nil {
+		panic(err)
+	}
 	//}
 
 	return &files
@@ -68,14 +68,14 @@ func GetFiles(src *string) *Tempfiles {
 func DoCopy(tempfiles *Tempfiles, src *string, root *string, projectName *string) {
 	for _, q := range tempfiles.files {
 		pathn := filepath.FromSlash(path.Join(filepath.FromSlash(path.Join(*root, "resources", *projectName)), filepath.FromSlash(q.src)))
-		if (q.isFile) {
+		if q.isFile {
 			dstFile, err := os.OpenFile(pathn, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0)
 			if (err != nil) {
 				log.Fatal(err)
 				continue
 			}
-			srcFile, err := os.OpenFile(pathn, os.O_RDONLY, 0)
-			if (err != nil) {
+			srcFile, err := os.OpenFile(q.src, os.O_RDONLY, 0)
+			if err != nil {
 				log.Fatal(err)
 				continue
 			}
@@ -130,7 +130,7 @@ func ReadConfig(config string) *T {
 
 func hasLuaResourceFile(src *string) bool {
 	luaFile := (path.Join(*src, "__resource.lua"))
-	if v, _ := os.Stat(luaFile);!v.IsDir() && v.Name() == "__resource.lua" {
+	if v, _ := os.Stat(luaFile); !v.IsDir() && v.Name() == "__resource.lua" {
 		return true
 	} else {
 		return false
