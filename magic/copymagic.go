@@ -80,6 +80,8 @@ func DoCopy(tempfiles *Tempfiles, src *string, root *string, projectName *string
 				continue
 			}
 			io.Copy(dstFile, srcFile)
+			dstFile.Close()
+			srcFile.Close()
 
 		} else {
 			if _, err := os.Stat(pathn); os.IsNotExist(err) {

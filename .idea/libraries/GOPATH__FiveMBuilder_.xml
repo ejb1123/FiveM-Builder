@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="GOPATH &lt;FiveMBuilder&gt;">
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../bugcatcher" />
       <root url="file://$PROJECT_DIR$/../../sourcegraph.com" />
       <root url="file://$PROJECT_DIR$/.." />
       <root url="file://$PROJECT_DIR$/../../xi2.org" />
@@ -10,6 +11,7 @@
       <root url="file://$PROJECT_DIR$/../../golang.org" />
     </CLASSES>
     <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../bugcatcher" />
       <root url="file://$PROJECT_DIR$/../../sourcegraph.com" />
       <root url="file://$PROJECT_DIR$/.." />
       <root url="file://$PROJECT_DIR$/../../xi2.org" />
